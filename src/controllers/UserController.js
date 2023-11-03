@@ -24,6 +24,27 @@ const create = async (req,res) =>{
     }
 }
 
+const signIn = async(req,res) =>{
+    try {
+        const response = await userService.signIn(req.body.Email,req.body.Password);
+        return res.status(400).json({
+            message : "Succesfully signed In",
+            err : {},
+            data : response,
+            success : true
+        })
+    } catch (error) {
+        console.log("at controller",error);
+        res.status(500).json({
+            data : {},
+            message: "not created succesfully",
+            success : false,
+            err : {error}
+        })
+    }
+}
+
 module.exports = {
-    create
+    create,
+    signIn
 }
